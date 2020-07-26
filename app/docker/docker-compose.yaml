@@ -1,0 +1,22 @@
+version: "3"
+
+services:
+  api-service:
+    build:
+      context: ../.
+      dockerfile: ./docker/dockerfiles/node.dockerfile
+    ports:
+      - "3000:3000"
+    volumes:
+      - "../services/api:/home"
+
+  server-service:
+    build:
+      context: ../.
+      dockerfile: ./docker/dockerfiles/flask.dockerfile
+    depends_on:
+      - api-service
+    ports:
+      - "5000:5000"
+    volumes:
+      - "../services/server:/home"
