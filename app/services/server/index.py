@@ -10,11 +10,9 @@ app = Flask(__name__, template_folder=os.getcwd())
 def server():
     res = requests.get('http://docker_api-service_1:3000')
     jsondata = res.json()
-    value = 0
     lista = []
     for item in jsondata:
         lista.append(item["product"])
-        value = value + 1
     return render_template("index.html", lista=lista, len=len(lista))
 
 
